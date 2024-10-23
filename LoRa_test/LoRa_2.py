@@ -43,6 +43,7 @@ def setup_lora():
 
 # Funzione per gestire la ricezione tramite interrupt
 def on_receive():
+    print("DIO0 Interrupt triggered!")  # Aggiungi una stampa per vedere se l'interrupt viene attivato
     if read_register(0x12) & 0x40:  # Verifica se ci sono dati ricevuti (flag RX_DONE)
         payload_length = read_register(0x13)  # Legge la lunghezza del pacchetto
         cs.off()
