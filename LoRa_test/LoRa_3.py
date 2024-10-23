@@ -33,7 +33,7 @@ def setup_lora():
     sleep(0.01)
     
     # Configura il modulo LoRa a 433 MHz
-    write_register(0x01, 0x81)  # Modalità sleep e LoRa
+    write_register(0x01, 0x80)  # Modalità sleep e LoRa
     write_register(0x06, 0x6C)  # Freq a 433 MHz
     write_register(0x07, 0x80)
     write_register(0x08, 0x00)
