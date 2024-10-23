@@ -56,4 +56,5 @@ dio0.when_pressed = on_receive
 
 # Loop principale per mantenere attivo il programma
 while True:
+    print("Waiting for incoming messages...")  # Stampa che indica lo stato di attesa
     sleep(1)
