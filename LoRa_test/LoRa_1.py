@@ -54,7 +54,8 @@ setup_lora()
 # Imposta un listener sul pin DIO0 per rilevare pacchetti ricevuti
 dio0.when_pressed = on_receive
 
+print("Waiting for incoming messages...")  # Stampa che indica lo stato di attesa
+
 # Loop principale per mantenere attivo il programma
 while True:
-    print("Waiting for incoming messages...")  # Stampa che indica lo stato di attesa
     sleep(1)
