@@ -71,7 +71,7 @@ def on_receive():
         payload_length = read_register(0x13)  # Leggi la lunghezza del pacchetto
         print("Payload length:", payload_length)
 
-        if payload_length > 0:
+        if payload_length > 0 & payload_length < 255:
             cs.off()
             payload = spi.xfer([0x00] * payload_length)
             cs.on()
