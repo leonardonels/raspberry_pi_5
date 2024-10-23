@@ -58,32 +58,32 @@ def get_snr():
         snr_value = (snr_value - 256)  # Converte in numero negativo
     print("SNR:", snr_value)
 
-
 # Funzione per gestire la ricezione tramite interrupt
 def on_receive():
-    print("DIO0 Interrupt triggered!")  # Aggiungi questa linea
-    get_rssi()  # Ottieni e stampa l'RSSI
-    get_snr()   # Ottieni e stampa l'SNR
+    print("DIO0 Interrupt triggered!")
+    rssi = get_rssi()
+    snr = get_snr()
+    print("RSSI:", rssi)
+    print("SNR:", snr)
 
-    if read_register(0x12) & 0x40:  # Controlla se ci sono dati ricevuti (RX_DONE)
+    # Controlla se RX_DONE è attivato
+    if read_register(0x12) & 0x40:  
         payload_length = read_register(0x13)  # Leggi la lunghezza del pacchetto
-        print("Payload length:", payload_length)  # Aggiungi questa linea
+        print("Payload length:", payload_length)
 
-        if payload_length == 255:
-            print("Received payload length is 255, skipping...")
-            check_registers()
-            return  # Esci dalla funzione se la lunghezza del payload è errata
-        
-        cs.off()
-        # Leggi il payload
-        payload = spi.xfer([0x00] * payload_length)  # Assicurati di leggere il giusto numero di byte
-        cs.on()
-        
-        # Stampa il payload ricevuto
-        print("Raw payload data:", payload)  # Stampa il payload grezzo
-        print("Received:", bytes(payload).decode('utf-8', 'ignore'))
-        write_register(0x12, 0x40)  # Pulisci il flag RX_DONE
+        if payload_length > 0:
+            cs.off()
+            payload = spi.xfer([0x00] * payload_length)
+            cs.on()
 
+            print("Raw payload data:", payload)
+            try:
+                print("Received:", bytes(payload).decode('utf-8', 'ignore'))
+            except Exception as e:
+                print("Decoding error:", e)
+
+            # Pulisci il flag RX_DONE
+            write_register(0x12, 0x40)
 
 # Inizializzazione del LoRa e gestione del reset
 setup_lora()
