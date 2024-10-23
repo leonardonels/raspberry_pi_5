@@ -3,7 +3,7 @@ from gpiozero import DigitalOutputDevice, Button
 from time import sleep
 
 # Configurazione pin GPIO
-cs = DigitalOutputDevice(8)  # Chip Select (NSS) su GPIO 8
+cs = DigitalOutputDevice(23)  # Chip Select (NSS) su GPIO 8
 reset = DigitalOutputDevice(25)  # Reset su GPIO 25
 dio0 = Button(24)  # DIO0 su GPIO 24 per gestire l'interrupt
 
