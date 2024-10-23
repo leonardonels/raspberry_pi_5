@@ -78,7 +78,9 @@ def on_receive():
 
             print("Raw payload data:", payload)
             try:
-                print("Received:", bytes(payload).decode('utf-8', 'ignore'))
+                # Supponiamo che i dati siano una stringa di byte
+                decoded = bytes(payload).decode('utf-8', 'ignore')
+                print("Received:", decoded)
             except Exception as e:
                 print("Decoding error:", e)
 
