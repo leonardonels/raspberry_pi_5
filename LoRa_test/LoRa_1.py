@@ -37,6 +37,9 @@ def setup_lora():
     write_register(0x06, 0x6C)  # Freq a 433 MHz
     write_register(0x07, 0x80)
     write_register(0x08, 0x00)
+    # Imposta la banda, spreading factor, e coding rate
+    write_register(0x1D, 0x72)  # BW = 500kHz, CR = 4/5
+    write_register(0x1E, 0x74)  # SF = 7
 
 # Funzione per gestire la ricezione tramite interrupt
 def on_receive():
