@@ -49,6 +49,7 @@ def on_receive():
         payload = spi.xfer([0x00] * payload_length)
         cs.on()
         print("Received:", bytes(payload).decode('utf-8', 'ignore'))
+        print("Payload length:", payload_length)
         write_register(0x12, 0x40)  # Pulisce il flag RX_DONE
 
 # Inizializzazione del LoRa e gestione del reset
